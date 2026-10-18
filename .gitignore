@@ -1,0 +1,54 @@
+# Repo's own files — these are never game content
+README.md
+CONTRIBUTING.md
+LEGAL.md
+AGENTS.md
+LICENSE
+
+# Guides and templates
+guides/**
+templates/**
+
+# Never commit game data.
+# This is a whitelist on purpose: it ignores everything, then includes only
+# source. An extracted asset cannot be committed by accident.
+#
+
+# Ignore everything by default
+/*
+
+# ...then include these
+!README.md
+!CONTRIBUTING.md
+!LEGAL.md
+!AGENTS.md
+!LICENSE
+!index.md
+!mkdocs.yml
+!.gitlab-ci.yml
+!assets/
+!assets/*.css
+!assets/*.svg
+!assets/fonts/
+!assets/fonts/*.woff2
+!assets/fonts/*.txt
+!.gitignore
+!guides/
+!templates/
+!guides/*.md
+!templates/*.md
+
+# A whitelist fails silently. A new file you created is ignored, git says
+# nothing, `git add -A` looks like it worked, and the file never ships. After
+# adding any new document, check it with:
+#   git check-ignore -q <file> && echo IGNORED || echo ships
+# `git status` will not tell you, because an ignored file does not appear in it.
+#
+# Do not rely on `git check-ignore -v`. It prints the matching rule and exits 0
+# even when that rule is a negation like `!AGENTS.md`, so a whitelisted file
+# looks identical to an ignored one. Without `-v` it reports only true matches.
+
+# If you keep screenshots or docs assets, add them explicitly, e.g.:
+# !docs/
+# !docs/*.png
+# !docs/*.gif

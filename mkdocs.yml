@@ -1,0 +1,127 @@
+site_name: AI Game Modding Guides
+site_description: Guides for building game mods with AI coding agents — passthrough mods, Rust rewrites, prompting, and troubleshooting.
+site_author: trevaintdead
+site_url: https://trevaintdead.gitlab.io/ai-modding-guides/
+repo_name: GitLab
+repo_url: https://gitlab.com/trevaintdead/ai-modding-guides
+# No theme-level edit_uri: docs_dir is a CI staging dir, so generated edit links
+# would point at paths that don't exist in the repo. Every page already carries a
+# hand-written "Edit this page" footer link with the correct URL.
+copyright: MIT licensed. <a href="https://trevaintdead.gitlab.io/ai-modding-guides/LEGAL/">Legal notice</a>. Nothing here is legal advice.
+
+# Built from a staging dir assembled in CI (see .gitlab-ci.yml). README.md is
+# deliberately NOT staged: index.md is the landing page and MkDocs treats a
+# README.md and index.md as the same page.
+docs_dir: site_src
+site_dir: public
+
+theme:
+  name: material
+  favicon: assets/favicon.svg
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.path
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+  # Fonts are self-hosted in assets/fonts and declared in assets/extra.css.
+  font: false
+  icon:
+    repo: fontawesome/brands/gitlab
+
+extra:
+  social:
+    - icon: fontawesome/brands/gitlab
+      link: https://gitlab.com/trevaintdead/ai-modding-guides
+      name: GitLab repository
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/ccFpNC26Ts
+      name: Discord server
+    - icon: fontawesome/solid/gavel
+      link: https://trevaintdead.gitlab.io/ai-modding-guides/LEGAL/
+      name: Legal notice
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
+      permalink_title: Link to this section
+
+extra_css:
+  - assets/extra.css
+
+nav:
+  - Home: index.md
+  - Guides:
+      - Start here:
+          - 0. Start Here: guides/00-start-here.md
+          - 1. Choosing an AI Agent: guides/01-choose-and-set-up-an-ai-agent.md
+      - Pick your project:
+          - 11. Choosing a Route: guides/11-choosing-a-route.md
+          - 8. Loaders and Script Extenders: guides/08-mod-loaders-and-script-extenders.md
+      - Build a passthrough mod:
+          - 2. Passthrough Mods: guides/02-passthrough-mods.md
+          - 9. Worked Example: guides/09-worked-example-passthrough-mod.md
+      - Build a Rust rewrite:
+          - 3. Rust Rewrites and Ports: guides/03-rust-rewrites-and-ports.md
+      - Work with the agent:
+          - 4. Prompting and Workflow: guides/04-prompting-and-workflow.md
+          - 5. Testing and Troubleshooting: guides/05-testing-and-troubleshooting.md
+      - See it done:
+          - 12. Case Studies: guides/12-case-studies-what-each-project-actually-did.md
+  - Reference:
+      - Look something up:
+          - 7. FAQ: guides/07-faq.md
+          - 13. Sync and Rendering Symptoms: guides/13-ownership-sync-and-rendering.md
+          - 14. The Decompile System Map: guides/14-decompile-system-map.md
+      - Before you publish:
+          - 6. Rules and Publishing: guides/06-rules-legal-and-publishing.md
+          - 10. Reverse Engineering and the Law: guides/10-reverse-engineering-and-the-law.md
+          - Legal notice: LEGAL.md
+      - About this repo:
+          - Contributing: CONTRIBUTING.md
+          - For AI Agents: AGENTS.md
+          - Licence: LICENSE
+  - Templates:
+      - AGENTS Starter: starter-files/AGENTS-starter.md
+      - Bridge Contract: starter-files/BRIDGE-CONTRACT.md
+      - Status Handoff: starter-files/STATUS-handoff.md
+      - Mod Log: starter-files/MODLOG-template.md
+      - Playtest Report: starter-files/PLAYTEST-report.md
+      - Attribution and Lineage: starter-files/ATTRIBUTION-and-lineage.md
+      - Workflow Write-up: starter-files/workflow-writeup.md

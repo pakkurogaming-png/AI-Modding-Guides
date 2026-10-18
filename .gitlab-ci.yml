@@ -1,0 +1,26 @@
+# GitLab Pages: builds the Markdown guides into a static site with MkDocs.
+# Site URL (public projects): https://trevaintdead.gitlab.io/ai-modding-guides/
+# Requires Settings > General > Visibility and Settings > Pages to allow Pages.
+image: python:3.12-slim
+
+pages:
+  stage: deploy
+  script:
+    - pip install --quiet "mkdocs>=1.6,<2" "mkdocs-material>=9.5,<10"
+    - rm -rf site_src public
+    - mkdir -p site_src/starter-files
+    # MkDocs ignores a directory literally named "templates", so stage them as starter-files.
+    - cp index.md site_src/index.md
+    - cp -r guides site_src/
+    - cp templates/*.md site_src/starter-files/
+    - cp CONTRIBUTING.md LEGAL.md AGENTS.md LICENSE site_src/
+    - cp -r assets site_src/
+    # Rewrite repo-relative template links to the staged location (link targets only, not code spans),
+    # and README.md links to index.md (MkDocs treats them as the same page).
+    - sed -i 's|](../templates/|](../starter-files/|g; s|](templates/|](starter-files/|g; s|](README\.md|](index.md|g' site_src/index.md site_src/AGENTS.md site_src/CONTRIBUTING.md site_src/guides/*.md site_src/starter-files/*.md
+    - mkdocs build --strict --site-dir public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
